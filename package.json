@@ -17,5 +17,6 @@
     "@withworkspace/protocol-kit": "workspace:*",
     "@withworkspace/protocol-go": "workspace:*",
     "@withworkspace/protocol-ts": "workspace:*"
-  }
+  },
+  "license": "MIT"
 }
