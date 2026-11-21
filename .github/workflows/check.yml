@@ -37,3 +37,6 @@ jobs:
           tmp=$(mktemp -d)
           cp plugin/gen/go/*.go "$tmp"
           cd "$tmp" && go mod init check && go vet ./...
+
+      - name: The generated TypeScript compiles
+        run: pnpm exec tsc --noEmit --strict --target es2023 --module nodenext plugin/gen/ts/protocol.gen.ts

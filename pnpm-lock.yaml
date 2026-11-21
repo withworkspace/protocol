@@ -20,6 +20,9 @@ importers:
       '@withworkspace/protocol-kit':
         specifier: workspace:*
         version: link:emitters/kit
+      '@withworkspace/protocol-ts':
+        specifier: workspace:*
+        version: link:emitters/ts
       typescript:
         specifier: 7.0.2
         version: 7.0.2
@@ -41,6 +44,22 @@ importers:
         version: 7.0.2
 
   emitters/kit:
+    devDependencies:
+      '@types/node':
+        specifier: 22.20.5
+        version: 22.20.5
+      '@typespec/compiler':
+        specifier: 1.17.0
+        version: 1.17.0(@types/node@22.20.5)
+      typescript:
+        specifier: 7.0.2
+        version: 7.0.2
+
+  emitters/ts:
+    dependencies:
+      '@withworkspace/protocol-kit':
+        specifier: workspace:*
+        version: link:../kit
     devDependencies:
       '@types/node':
         specifier: 22.20.5

@@ -204,3 +204,38 @@ function readConst(node: any): Decl {
     .trim();
   return { kind: "const", name, value, doc: doc || undefined };
 }
+
+/** A piece of a doc: a paragraph, or a fenced block (```) kept as written. */
+export interface DocBlock {
+  code: boolean;
+  text: string;
+}
+
+/** A doc as its paragraphs and fenced blocks, in order. */
+export function docBlocks(doc: string): DocBlock[] {
+  const blocks: DocBlock[] = [];
+  doc
+    .trim()
+    .split(/^```.*$/m)
+    .forEach((part, i) => {
+      if (i % 2 === 1) blocks.push({ code: true, text: part.replace(/^\n|\n$/g, "") });
+      else for (const p of part.split(/\n\s*\n/)) if (p.trim()) blocks.push({ code: false, text: p.trim() });
+    });
+  return blocks;
+}
+
+/** A paragraph's words, as lines of at most width. */
+export function wrap(text: string, width: number): string[] {
+  const lines: string[] = [];
+  let line = "";
+  for (const word of text.split(/\s+/)) {
+    if (line && line.length + 1 + word.length > width) {
+      lines.push(line);
+      line = word;
+    } else {
+      line = line ? `${line} ${word}` : word;
+    }
+  }
+  if (line) lines.push(line);
+  return lines;
+}

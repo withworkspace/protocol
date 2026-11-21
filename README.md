@@ -15,10 +15,14 @@ emitters/
              @presence, @intKeys) and what every emitter reads a spec by: its declarations in
              order, and its methods
   go/        TypeSpec → one Go file of types, constants and method names
+  ts/        TypeSpec → one TypeScript module of the same, and what each side may send
+             the other by method (RequestsToPlugin, NotificationsToWS…), which types a
+             framework's calls and handlers
 plugin/
   spec/      the plugin protocol, in TypeSpec
   gen/go/    protocol.gen.go, committed: the kit's protocol package is this file
              and its own rules beside it
+  gen/ts/    protocol.gen.ts, committed: the TypeScript kit's (withworkspace/plugin, ts/)
 ```
 
 There's one emitter per language, not one per protocol: the Go emitter would write the frame protocol too, were it wanted in Go.
@@ -39,4 +43,4 @@ just gen     # emitters built, every spec's code written to its gen/
 just check   # and fails if that's not what's committed, or doesn't compile
 ```
 
-It needs Node 22, pnpm and Go. A framework takes its file from here as it's committed, with no Node: the kit's `just protocol`.
+It needs Node 22, pnpm and Go. A framework takes its file from here as it's committed: the kit's `just protocol` brings both.

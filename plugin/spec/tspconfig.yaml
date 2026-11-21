@@ -1,7 +1,11 @@
 emit:
   - "@withworkspace/protocol-go"
+  - "@withworkspace/protocol-ts"
 options:
   "@withworkspace/protocol-go":
     emitter-output-dir: "{project-root}/../gen/go"
     package: protocol
     file: protocol.gen.go
+  "@withworkspace/protocol-ts":
+    emitter-output-dir: "{project-root}/../gen/ts"
+    file: protocol.gen.ts

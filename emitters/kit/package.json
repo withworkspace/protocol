@@ -5,8 +5,23 @@
   "type": "module",
   "main": "dist/index.js",
   "tspMain": "lib/main.tsp",
-  "exports": { ".": { "typespec": "./lib/main.tsp", "default": "./dist/index.js", "types": "./dist/index.d.ts" } },
-  "scripts": { "build": "tsc -p ." },
-  "peerDependencies": { "@typespec/compiler": "1.17.0" },
-  "devDependencies": { "@typespec/compiler": "1.17.0", "@types/node": "22.20.5", "typescript": "7.0.2" }
+  "exports": {
+    ".": {
+      "typespec": "./lib/main.tsp",
+      "default": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p ."
+  },
+  "peerDependencies": {
+    "@typespec/compiler": "1.17.0"
+  },
+  "devDependencies": {
+    "@typespec/compiler": "1.17.0",
+    "@types/node": "22.20.5",
+    "typescript": "7.0.2"
+  },
+  "license": "MIT"
 }
