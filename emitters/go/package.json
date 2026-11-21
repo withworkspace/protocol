@@ -1,0 +1,12 @@
+{
+  "name": "@withworkspace/protocol-go",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "exports": { ".": { "default": "./dist/index.js", "types": "./dist/index.d.ts" } },
+  "scripts": { "build": "tsc -p ." },
+  "dependencies": { "@withworkspace/protocol-kit": "workspace:*" },
+  "peerDependencies": { "@typespec/compiler": "1.17.0" },
+  "devDependencies": { "@typespec/compiler": "1.17.0", "@types/node": "22.20.5", "typescript": "7.0.2" }
+}

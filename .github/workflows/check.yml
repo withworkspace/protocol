@@ -1,0 +1,39 @@
+name: Check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-go@v6
+        with:
+          go-version: "1.27"
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Generate, as just gen does
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm run build
+          pnpm exec tsp compile plugin/spec --config plugin/spec/tspconfig.yaml
+          gofmt -w plugin/gen/go
+
+      - name: What's generated is what's committed
+        run: git diff --exit-code -- plugin/gen
+
+      - name: The generated Go compiles
+        run: |
+          tmp=$(mktemp -d)
+          cp plugin/gen/go/*.go "$tmp"
+          cd "$tmp" && go mod init check && go vet ./...
