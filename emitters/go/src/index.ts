@@ -15,7 +15,7 @@ import {
   type Scalar,
   type Type,
 } from "@typespec/compiler";
-import { isIntKeys, isPresence, readProtocol, type Decl, type Method } from "@withworkspace/protocol-kit";
+import { docBlocks, isIntKeys, isPresence, readProtocol, wrap, type Decl, type Method } from "@withworkspace/protocol-kit";
 
 export interface GoOptions {
   /** The Go package the file is in. */
@@ -244,11 +244,7 @@ class GoWriter {
   private comment(doc: string | undefined, indent: string) {
     if (!doc) return;
     const width = 74 - indent.replace(/\t/g, "    ").length;
-    const blocks: { code: boolean; text: string }[] = [];
-    doc.trim().split(/^```.*$/m).forEach((part, i) => {
-      if (i % 2 === 1) blocks.push({ code: true, text: part.replace(/^\n|\n$/g, "") });
-      else for (const p of part.split(/\n\s*\n/)) if (p.trim()) blocks.push({ code: false, text: p.trim() });
-    });
+    const blocks = docBlocks(doc);
     blocks.forEach((b, i) => {
       if (i > 0) this.out.push(`${indent}//`);
       if (b.code) {
@@ -283,19 +279,4 @@ function literal(v: string | number | boolean): string {
 // sentence about it by name.
 function trailing(doc: string, name: string): boolean {
   return !doc.includes("\n") && doc.length <= 60 && !doc.startsWith(name);
-}
-
-function wrap(text: string, width: number): string[] {
-  const lines: string[] = [];
-  let line = "";
-  for (const word of text.split(/\s+/)) {
-    if (line && line.length + 1 + word.length > width) {
-      lines.push(line);
-      line = word;
-    } else {
-      line = line ? `${line} ${word}` : word;
-    }
-  }
-  if (line) lines.push(line);
-  return lines;
 }

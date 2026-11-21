@@ -9,6 +9,7 @@ gen:
 check: gen
     git diff --exit-code -- plugin/gen
     just vet-go plugin/gen/go
+    pnpm exec tsc --noEmit --strict --target es2023 --module nodenext plugin/gen/ts/protocol.gen.ts
 
 # go vet a folder of generated Go, as a module of its own.
 vet-go dir:
