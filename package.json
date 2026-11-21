@@ -1,0 +1,18 @@
+{
+  "name": "protocol",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.28.1",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "build": "pnpm --filter \"./emitters/*\" run build",
+    "gen": "pnpm run build && tsp compile plugin/spec --config plugin/spec/tspconfig.yaml"
+  },
+  "devDependencies": {
+    "@typespec/compiler": "1.17.0",
+    "@types/node": "22.20.5",
+    "typescript": "7.0.2",
+    "@withworkspace/protocol-kit": "workspace:*",
+    "@withworkspace/protocol-go": "workspace:*"
+  }
+}
