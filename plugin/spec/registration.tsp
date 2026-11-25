@@ -29,6 +29,12 @@ model Registration {
    */
   proposes?: Proposes[];
 
+  /**
+   * Notifies are the kinds of notification the plugin sends the person
+   * (notification/add), each theirs to route in Settings › Notifications.
+   */
+  notifies?: Notifies[];
+
   config_version?: int32;
   config?: ConfigKey[];
 }
