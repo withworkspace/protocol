@@ -889,12 +889,42 @@ type Thing struct {
 	// Changed is when it last changed, where the plugin knows: of two found
 	// alike, the newer is first.
 	Changed time.Time `json:"changed,omitzero"`
+	// Standing is where it stands, in words every kind shares, for what's
+	// found of it to be weighed by: a Jira issue in progress is open, one
+	// done is settled, one closed as won't do is gone. Its kind's state
+	// field says the same in the plugin's own words, for people. None, or
+	// one ws doesn't know, is StandingOpen.
+	Standing string `json:"standing,omitempty"`
+	// Since is when it came to stand as it does, for one that's settled or
+	// gone (a Jira issue's resolution date): what's found of it ages from
+	// then. None is from when it last changed.
+	Since time.Time `json:"since,omitzero"`
 	// Fields are its values, by its kind's fields' names, each a string (a
 	// time as RFC 3339). One its kind hasn't is dropped, and ws keeps the
 	// start of a long one. A thing with nothing for its kind's title isn't
 	// kept.
 	Fields map[string]string `json:"fields"`
 }
+
+// Standing is where a thing stands, in words every kind shares, ws's own
+// among them (a mission, a decision, a conversation): what's found of a
+// thing that's settled, or no longer so, is found below what's still so, the
+// more so the longer since, and is said to be.
+const (
+	// kept true by being kept: what it says now is what it says. It doesn't
+	// age.
+	StandingLasting = "lasting"
+	// in force, or still to do: an open issue. It doesn't age while it's
+	// open.
+	StandingOpen = "open"
+	// of its moment: true when it was said, and aging from when it last
+	// changed
+	StandingPassing = "passing"
+	StandingSettled = "settled" // done: an issue resolved. It ages from Since.
+	// no longer so: an issue closed as won't do, or as another's duplicate.
+	// It ages from Since, found lower still.
+	StandingGone = "gone"
+)
 
 // ThingPutParams are things to keep: each added, or put in place of what ws
 // had by that name.
