@@ -12,6 +12,7 @@ import "./conversations.tsp";
 import "./things.tsp";
 import "./remote.tsp";
 import "./proposals.tsp";
+import "./notifications.tsp";
 
 using WS.Protocol;
 
