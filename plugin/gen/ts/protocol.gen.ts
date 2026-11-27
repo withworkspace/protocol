@@ -526,10 +526,10 @@ export interface Action {
   hint?: string;
   /**
    * Keys are the keys the plugin suggests for its own action, as ws names a key
-   * press ("n", "mod+shift+i"; one then another with a space). ws binds them
-   * under the plugin key the person chose, if they chose one (with "," as
-   * theirs, "n" is ", n"), never by themselves: which keys do what is theirs to
-   * set, in Settings › Keyboard.
+   * press ("n", "mod+shift+i"; one then another with a space). They're a
+   * suggestion, never bound by ws: the person sees them in Settings › Keyboard,
+   * with what they'd clash with, and takes them or gives the action keys of
+   * their own. Two plugins may suggest the same.
    */
   keys?: string[];
   /**
