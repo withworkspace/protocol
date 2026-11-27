@@ -1178,13 +1178,16 @@ type Proposes struct {
 	Title string `json:"title"`
 	Icon  string `json:"icon,omitempty"`
 	When  string `json:"when,omitempty"`
-	// unattended says one may be accepted with nobody looking at it: by an
-	// automation the user has let do it (granted, per automation, per kind)
-	// as it runs on what happens. It's the plugin's call: a comment on an
-	// issue is safe so; a move that sets off another system's own rules may
-	// not be. Without it, an automation only ever proposes one, for the user
-	// to accept.
+	// unattended is the plugin vouching that one is safe accepted with
+	// nobody looking at it: by an automation as it runs on what happens (a
+	// comment on an issue). Whether an automation does is the user's to say,
+	// kind by kind (a grant): this is advice to them, not a gate.
 	Unattended bool `json:"unattended,omitempty"`
+	// caution is why one might not be safe accepted with nobody looking, in
+	// a sentence for the user deciding whether to let an automation do it:
+	// "A move may set off the board's own rules, which nobody sees happen."
+	// Shown as they grant it, where the plugin doesn't vouch for it.
+	Caution string `json:"caution,omitempty"`
 }
 
 // ProposalDraftParams is a conversation's agent proposing something of the
