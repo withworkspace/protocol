@@ -1,0 +1,8 @@
+[capsule]
+after_create = "pnpm install --frozen-lockfile"
+
+[run.task.check]
+display_name = "Check"
+description = "Regenerate the protocol's code and fail if it differs from what's committed or doesn't compile"
+command = "just check"
+timeout = "10m"
