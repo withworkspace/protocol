@@ -57,7 +57,7 @@ enum Where {
 
 /**
  * Here is what was open when an action was asked for: its ref (a mission's
- * slug, jira:RAM-12), its kind (as Action.On names kinds), what it's called,
+ * slug, a Jira issue's RAM-12), its kind (as Action.On names kinds), what it's called,
  * and the words picked out in it, if any.
  */
 model Here {
