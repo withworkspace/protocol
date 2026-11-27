@@ -1430,6 +1430,20 @@ export interface Proposes {
   title: string;
   icon?: string;
   when?: string;
+  /**
+   * unattended is the plugin vouching that one is safe accepted with nobody
+   * looking at it: by an automation as it runs on what happens (a comment on an
+   * issue). Whether an automation does is the user's to say, kind by kind (a
+   * grant): this is advice to them, not a gate.
+   */
+  unattended?: boolean;
+  /**
+   * caution is why one might not be safe accepted with nobody looking, in a
+   * sentence for the user deciding whether to let an automation do it: "A move
+   * may set off the board's own rules, which nobody sees happen." Shown as they
+   * grant it, where the plugin doesn't vouch for it.
+   */
+  caution?: string;
 }
 
 /**
