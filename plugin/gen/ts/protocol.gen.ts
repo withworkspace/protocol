@@ -1430,6 +1430,14 @@ export interface Proposes {
   title: string;
   icon?: string;
   when?: string;
+  /**
+   * unattended says one may be accepted with nobody looking at it: by an
+   * automation the user has let do it (granted, per automation, per kind) as it
+   * runs on what happens. It's the plugin's call: a comment on an issue is safe
+   * so; a move that sets off another system's own rules may not be. Without it,
+   * an automation only ever proposes one, for the user to accept.
+   */
+  unattended?: boolean;
 }
 
 /**
